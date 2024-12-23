@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>富海合同会社 | パソコン周辺機器販売</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* 首页样式 */
+        .home {
+            min-height: 100vh;
+            background: url('./back.jpg') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .home h1 {
+            font-size: 10vw;
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            animation: moveToTop 2s ease-in-out forwards;
+        }
+
+        .home .ad-text {
+            font-size: 5vw;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: #ffcc00;
+            opacity: 0;
+            animation: fadeIn 2.5s ease-in-out forwards;
+            animation-delay: 2s;
+            line-height: 1.5;
+        }
+
+        .home .ad-text span {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .home h1 {
+                font-size: 12vw;
+            }
+
+            .home .ad-text {
+                font-size: 7vw;
+                line-height: 1.8;
+            }
+        }
+
+        @keyframes moveToTop {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-200px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 产品列表 */
+        .products {
+            padding: 3rem 1rem;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.2rem;
+        }
+
+        /* 商品分类 */
+        .product-category {
+            margin: 2rem 0;
+        }
+
+        .product-category h3 {
+            font-size: 1.5rem;
+            color: #34495e;
+            margin-bottom: 1rem;
+        }
+
+        /* 会社概要 */
+        .overview {
+            padding: 3rem 1rem;
+            background: #ecf0f1;
+            text-align: center;
+        }
+
+        .overview table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .overview th, .overview td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+        }
+
+        .overview th {
+            background: #f4f4f4;
+        }
+
+        /* 底部 */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        
+    </style>
+    <style>
+    @media (max-width: 768px) {
+        .home h1 {
+            font-size: 25vw; /* 增大公司名字字体 */
+            text-shadow: 
+                5px 5px 10px rgba(0, 0, 0, 0.8), 
+                -5px -5px 10px rgba(0, 0, 0, 0.8),
+                5px -5px 10px rgba(0, 0, 0, 0.8),
+                -5px 5px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .home .ad-text {
+            font-size: 9vw; /* 增大广告语字体 */
+            line-height: 1.8;
+            text-shadow: 
+                4px 4px 8px rgba(0, 0, 0, 0.7), 
+                -4px -4px 8px rgba(0, 0, 0, 0.7),
+                4px -4px 8px rgba(0, 0, 0, 0.7),
+                -4px 4px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem; /* 增大商品简介字体 */
+        }
+
+        .product-card p {
+            font-size: 1.2rem; /* 商品价格也稍作调整 */
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- 首页 -->
+    <section class="home">
+        <h1>富海</h1>
+        <p class="ad-text">
+            <span>最高品質のPC周辺機器を、</span>
+            <span>あなたのデスクに。</span>
+            <span>快適な作業環境をお届けします。</span>
+        </p>
+        <div class="scroll-indicator" onclick="scrollToSection('.products')">↓ 下にスクロール</div>
+    </section>
+
+    <!-- 产品列表 -->
+    <section class="products">
+        <h2>商品リスト</h2>
+        
+        <!-- 电脑周边 -->
+        <div class="product-category">
+            <h3>パソコン周辺機器</h3>
+            <div class="product-list">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="LEDデスクライト">
+                    <h3>LEDデスクライト</h3>
+                    <p>¥3,000</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="ケーブル整理ツール">
+                    <h3>ケーブル整理ツール</h3>
+                    <p>¥1,500</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="マウスパッド">
+                    <h3>マウスパッド</h3>
+                    <p>¥1,000</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="USBハブ">
+                    <h3>USBハブ</h3>
+                    <p>¥2,500</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="ヘッドフォンスタンド">
+                    <h3>ヘッドフォンスタンド</h3>
+                    <p>¥2,000</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电脑支架 -->
+        <div class="product-category">
+            <h3>パソコンスタンド</h3>
+            <div class="product-list">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="モニターアーム">
+                    <h3>モニターアーム</h3>
+                    <p>¥10,000</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="ノートPCスタンド">
+                    <h3>ノートPCスタンド</h3>
+                    <p>¥6,000</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="高さ調整可能なPCスタンド">
+                    <h3>高さ調整PCスタンド</h3>
+                    <p>¥8,000</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="折りたたみPCスタンド">
+                    <h3>折りたたみPCスタンド</h3>
+                    <p>¥5,000</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="デュアルモニタースタンド">
+                    <h3>デュアルモニタースタンド</h3>
+                    <p>¥12,000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 会社概要 -->
+    <section class="overview">
+        <h2>会社概要</h2>
+        <table>
+            <tr>
+                <th>会社名</th>
+                <td>富海合同会社</td>
+            </tr>
+            <tr>
+                <th>所在地</th>
+                <td>東京都葛飾区青戸四丁目5-12スカイコ一ト戸206号室</td>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <td>03-5678-1234</td>
+            </tr>
+            <tr>
+                <th>設立年月日</th>
+                <td>2024年9月5日</td>
+            </tr>
+            <tr>
+                <th>代表社員</th>
+                <td>王海浜、王勉</td>
+            </tr>
+            <tr>
+                <th>資本金</th>
+                <td>501万円</td>
+            </tr>
+            <tr>
+                <th>主要業務</th>
+                <td>貿易業務、PC周辺機器販売</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- 底部 -->
+    <section class="footer">
+        <p>© 2024 富海合同会社</p>
+        <p>住所: 東京都葛飾区青戸四丁目5-12スカイコ一ト戸206号室</p>
+        <p>電話: 03-5678-1234</p>
+    </section>
+
+    <script>
+        function scrollToSection(sectionClass) {
+            const section = document.querySelector(sectionClass);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
